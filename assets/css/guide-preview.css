@@ -1,0 +1,8 @@
+.guide-entry { position: relative; margin: 0 0 30px; padding: 28px 30px; overflow: hidden; border: 0 !important; background: #173f35; color: #f5f5eb; }
+.guide-entry:after { position: absolute; top: -42px; right: 4%; width: 180px; height: 180px; content: ''; border: 1px solid rgba(214,228,135,.24); border-radius: 50%; box-shadow: 0 0 0 20px rgba(214,228,135,.04), 0 0 0 42px rgba(214,228,135,.03); pointer-events: none; }
+.guide-entry .guide-entry-kicker { margin: 0 0 8px; color: #d6e487; font: 10px/1.4 monospace; letter-spacing: .1em; }
+.guide-entry h2 { margin: 0 0 8px; color: #fff; font-size: 19px; letter-spacing: .08em; }
+.guide-entry p:not(.guide-entry-kicker) { max-width: 510px; margin: 0 0 17px; color: #d1dcd3; font-size: 14px; }
+.guide-entry .button { position: relative; z-index: 1; border-color: #d6e487; color: #173f35; background: #d6e487; }
+.guide-entry .button:hover { color: #173f35 !important; background: #e2eca5; }
+@media screen and (max-width: 736px) { .guide-entry { padding: 22px 20px; } }

@@ -1,0 +1,100 @@
+<?php
+declare(strict_types=1);
+session_start();
+if (empty($_SESSION['guide_csrf'])) $_SESSION['guide_csrf'] = bin2hex(random_bytes(32));
+?>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#173f35" />
+	<title>Guide Workspace | Climb Nepal</title>
+	<link rel="stylesheet" href="assets/css/guide.css" />
+	<script defer src="assets/js/guide.js"></script>
+</head>
+<body>
+	<header class="workspace-header">
+		<a class="brand" href="index.html" aria-label="Climb Nepal home"><span class="brand-mark">CN</span><span>CLIMB <b>NEPAL</b></span></a>
+		<a class="site-link" href="index.html">Back to Climb Nepal <span aria-hidden="true">&#8599;</span></a>
+	</header>
+	<main class="workspace">
+		<div class="page-heading">
+			<div><p class="eyebrow">FIELD OPERATIONS / GUIDE DESK</p><h1>Trip checklist</h1><p class="heading-copy">One clear view of the details, people and preparations behind a safe trek.</p></div>
+			<button class="button button-primary" id="new-trek-button" type="button"><span aria-hidden="true">+</span> New trek</button>
+		</div>
+		<section class="trek-bar" aria-label="Trek selection">
+			<label for="trek-select">Active trek</label>
+			<select id="trek-select" aria-label="Select a trek"></select>
+			<span class="save-status" id="save-status" role="status" aria-live="polite">Loading treks…</span>
+			<button class="button button-quiet" id="delete-trek-button" type="button" hidden>Delete trek</button>
+		</section>
+		<section id="empty-state" class="empty-state" hidden>
+			<p class="eyebrow">YOUR GUIDE DESK</p><h2>Start with a trek</h2>
+			<p>Create a trek to generate its preparation, briefing, packing and safety checklist.</p>
+			<button class="button button-primary" id="empty-new-trek" type="button">Create your first trek</button>
+		</section>
+		<div id="trek-content" hidden>
+			<section class="trip-overview" aria-labelledby="trip-title">
+				<div class="trip-title-block"><div class="trip-title-row"><p class="eyebrow" id="trip-destination">DESTINATION</p><span class="status-badge" id="trip-status">Preparation</span></div><h2 id="trip-title"></h2><p id="trip-dates" class="trip-dates"></p></div>
+				<div class="trip-facts"><div><span>Guests</span><strong id="trip-guests"></strong></div><div><span>Lead guide</span><strong id="trip-guide"></strong></div><div><span>Assistant</span><strong id="trip-assistant"></strong></div><div><span>Agency</span><strong id="trip-agency"></strong></div></div>
+			</section>
+			<section class="progress-band" aria-label="Overall checklist progress">
+				<div class="progress-copy"><strong id="overall-progress">0%</strong><span id="progress-count">0 of 0 tasks complete</span></div>
+				<div class="progress-track"><span id="overall-progress-bar"></span></div>
+				<label class="status-control">Trek status<select id="status-select"><option value="preparation">Preparation</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label>
+			</section>
+			<section class="tool-row" aria-label="Checklist tools">
+				<label class="search-control"><span class="visually-hidden">Search tasks</span><span aria-hidden="true">&#9906;</span><input id="task-search" type="search" placeholder="Search tasks, notes…" /></label>
+				<div class="filter-switch" role="group" aria-label="Filter checklist tasks"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="pending" aria-pressed="false">Pending</button><button type="button" data-filter="completed" aria-pressed="false">Completed</button></div>
+				<button class="button button-outline" id="add-task-button" type="button">+ Add task</button>
+				<button class="button button-outline" id="add-day-button" type="button">+ Daily trek</button>
+				<a class="button button-outline" id="download-link" href="#">Download TXT</a>
+				<button class="button button-outline" id="print-button" type="button">Print</button>
+				<button class="button button-quiet" id="reset-all-button" type="button">Reset trek</button>
+			</section>
+			<section class="checklist-layout" aria-label="Trek checklist">
+				<div id="category-list" class="category-list"></div>
+				<aside class="notes-panel">
+					<div class="panel-heading"><div><p class="eyebrow">TRIP RECORD</p><h2>Field notes</h2></div><span aria-hidden="true">02</span></div>
+					<label for="general-notes">Trek notes</label><textarea id="general-notes" rows="6" placeholder="Log logistics, reminders and useful trip details…"></textarea>
+					<label for="emergency-notes">Emergency notes</label><textarea id="emergency-notes" rows="5" placeholder="Keep key contacts, locations or route-specific notes here."></textarea>
+					<p class="notes-foot">Last saved <time id="last-saved">Not yet saved</time></p>
+				</aside>
+			</section>
+		</div>
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+	</main>
+	<dialog id="new-trek-dialog" class="dialog">
+		<form id="new-trek-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">TRIP SETUP</p><h2>Create a trek</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">&#215;</button></div>
+			<div class="form-grid">
+				<label class="field field-wide">Trek name<input name="name" required maxlength="100" placeholder="Everest Base Camp" /></label>
+				<label class="field field-wide">Trek type / destination<input name="destination" required maxlength="120" placeholder="Khumbu region · Nepal" /></label>
+				<label class="field">Start date<input name="startDate" type="date" required /></label><label class="field">End date<input name="endDate" type="date" required /></label>
+				<label class="field">Number of guests<input name="guests" type="number" min="1" max="1000" required value="1" /></label><label class="field">Guide name<input name="guide" maxlength="100" placeholder="Guide name" /></label>
+				<label class="field">Assistant guide<input name="assistant" maxlength="100" placeholder="Optional" /></label><label class="field">Agency / company<input name="agency" maxlength="120" placeholder="Company name" /></label>
+				<label class="field field-wide">Notes<textarea name="notes" rows="3" maxlength="3000" placeholder="Route-specific reminders…"></textarea></label>
+			</div>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Create trek</button></div>
+		</form>
+	</dialog>
+	<dialog id="add-task-dialog" class="dialog">
+		<form id="add-task-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">CHECKLIST EDIT</p><h2>Add a task</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">&#215;</button></div>
+			<label class="field">Task name<input name="title" required maxlength="160" placeholder="Arrange an extra lodge night" /></label>
+			<label class="field">Category<select name="category" id="task-category" required></select></label>
+			<label class="field">Optional note<textarea name="note" rows="3" maxlength="1000" placeholder="Add a useful detail…"></textarea></label>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Add to checklist</button></div>
+		</form>
+	</dialog>
+	<dialog id="add-day-dialog" class="dialog dialog-small">
+		<form id="add-day-form" method="dialog">
+			<div class="dialog-heading"><div><p class="eyebrow">REUSABLE DAILY LIST</p><h2>Add trekking day</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close">&#215;</button></div>
+			<label class="field">Trek date<input name="date" type="date" required /></label>
+			<p class="form-hint">Adds morning, on-trail and arrival checks for this date.</p>
+			<div class="dialog-actions"><button class="button button-outline" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Create daily list</button></div>
+		</form>
+	</dialog>
+</body>
+</html>
