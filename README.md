@@ -7,7 +7,7 @@ The Guide Checklist is a PHP and vanilla JavaScript workspace linked from the ma
 - Deploy the site to a PHP-enabled host running PHP 7.4 or newer.
 - Ensure the PHP process can create and write files in `data/treks/`.
 - Keep web-server directory listing disabled. The included `.htaccess` blocks direct access to stored treks on Apache; configure an equivalent deny rule if using Nginx.
-- Open `guide.php` through the web server. Opening the file directly or using a static-only host will not run the PHP endpoints.
+- Open `guide.html` from the site. On a PHP-enabled host, it uses the PHP API and JSON files automatically. On static hosting or when opened locally, it falls back to browser storage, which is saved only in that browser and is not shared between devices.
 
 No database or build step is required. Checklist definitions can be changed in `todos.php`; each trek gets its own copy when created, so later catalog edits do not overwrite existing treks.
 

@@ -151,6 +151,17 @@ if ($action === 'task') {
     }
     unset($task);
     if (!$found) respond(['error' => 'Checklist item not found.'], 404);
+} elseif ($action === 'remove-task') {
+    $taskId = clean_text($input['taskId'] ?? '', 100);
+    $found = false;
+    foreach ($trek['tasks'] as $index => $task) {
+        if ($task['id'] === $taskId && !empty($task['custom'])) {
+            array_splice($trek['tasks'], $index, 1);
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) respond(['error' => 'Custom task not found.'], 404);
 } elseif ($action === 'add-task') {
     $title = clean_text($input['title'] ?? '', 160);
     $category = clean_text($input['category'] ?? '', 80);
