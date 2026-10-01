@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Shared Expenses | Climb Nepal</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Shared expense tracking for groups, trips and travel costs in Nepal." />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/shared-expenses.css" />
+</head>
+<body class="is-preload">
+	<div id="wrapper">
+		<header id="header">
+			<h1><a href="index.html">Climb Nepal</a></h1>
+			<nav class="links">
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="treks.html">Treks</a></li>
+					<li><a href="expeditions.html">Expeditions</a></li>
+					<li><a href="shared-expenses.html" class="active">Shared Expenses</a></li>
+					<li><a href="guide.php">Guide Checklist</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+			<nav class="main">
+				<ul>
+					<li class="search">
+						<a class="fa-search" href="#search">Search</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search details..." />
+						</form>
+					</li>
+					<li class="menu">
+						<a class="fa-bars" href="#menu">Menu</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<section id="menu">
+			<section>
+				<form class="search" method="get" action="#">
+					<input type="text" name="query" placeholder="Search details..." />
+				</form>
+			</section>
+			<section>
+				<ul class="links">
+					<li>
+						<a href="index.html">
+							<h3>Home</h3>
+							<p>Latest treks, climbs and trip insights</p>
+						</a>
+					</li>
+					<li>
+						<a href="treks.html">
+							<h3>Trekking Packages</h3>
+							<p>Everest, Annapurna, Langtang &amp; Manaslu routes</p>
+						</a>
+					</li>
+					<li>
+						<a href="expeditions.html">
+							<h3>Peak Climbing</h3>
+							<p>Guided climbs on Nepal's trekking peaks</p>
+						</a>
+					</li>
+					<li>
+						<a href="shared-expenses.html">
+							<h3>Shared Expenses</h3>
+							<p>Track group spending, balances and repayments</p>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<ul class="actions stacked">
+					<li><a href="contact.html" class="button large fit">Plan Your Trip</a></li>
+				</ul>
+			</section>
+		</section>
+
+		<div id="main">
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2>Shared Expenses</h2>
+						<p>Manage group trips, shared costs and repayments in one place.</p>
+					</div>
+				</header>
+				<div id="shared-expense-app"></div>
+			</article>
+		</div>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/shared-expenses.js"></script>
+</body>
+</html>
